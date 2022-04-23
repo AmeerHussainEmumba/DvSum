@@ -18,7 +18,8 @@ export async function editView(page:Page){
             var variableName=selectedNamesForLocators[i];
             await page.dragAndDrop('//div[@class="colElement name" and contains (.,"'+variableName+'")]',selectedColumns);
         }
-
+    await page.click(saveButton);
+    console.log("save button clicked");
     selectedNamesForLocators.unshift(newViewName);    
     const dropDownForCriteria= await page.$(criteriaDropDown);
     await dropDownForCriteria.selectOption({index: 2});

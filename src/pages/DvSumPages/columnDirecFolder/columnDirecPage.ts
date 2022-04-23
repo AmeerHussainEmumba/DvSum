@@ -1,5 +1,5 @@
 import { Page, expect } from  '@playwright/test';
-import {dropDownMenu,dropDownSelectionForEditing,ctaButton,columnEditURL,editButton,deleteButton,dropDownSelectionForDeletion,finalDeleteButton,favouriteButton, viewFavouritedCheck} from  './columnDirecPageTargets'
+import {dropDownMenu,dropDownSelectionForEditing,ctaButton,columnEditURL,editButton,deleteButton,dropDownSelectionForDeletion,finalDeleteButton,favouriteButton, viewFavouritedCheck,deletionIFrame} from  './columnDirecPageTargets'
 
 
 export async function editColumn(page:Page){
@@ -15,18 +15,14 @@ export async function deleteView(page:Page){
     await page.click(dropDownMenu);
     await page.click(dropDownSelectionForDeletion);
     await page.click(ctaButton);
-    await page.waitForTimeout(3000);
+
     await page.click(deleteButton);
     
-    
-    //const frameForDeleteOption= await page.frame({url: "about:blank"});
-    const locator= await page.frameLocator("//*[@id='mainBodyContainer']/iframe[2]").locator('//button[@class="btn btn-primary"]')
-    
-    await page.waitForTimeout(3000);
-    await locator.click();
-    //const finalDeletionButton= await frameForDeleteOption.$('//button[@class="btn btn-primary"]');
-    //await finalDeletionButton.click();
+    var frameForDeleteOption= await page.frame({url: /about:blank/});
+    await page.click(finalDeleteButton);
+    return dropDownSelectionForDeletion;
 }
+ 
 
 export async function favouriteView(page:Page) {
 
@@ -38,7 +34,6 @@ export async function favouriteView(page:Page) {
         console.log("View is already favourited. Proceeding to un-favourite and favourite it agian.")
         await page.click(favouriteButton);
         await page.click(favouriteButton);
-        
     }
     else
     {

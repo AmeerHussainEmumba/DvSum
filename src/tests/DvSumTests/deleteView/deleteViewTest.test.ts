@@ -1,9 +1,10 @@
 import { test, expect } from '@playwright/test';
-import { setUpDvSum,checkEditSetting } from '../../../pages/DvSumPages/basePageFolder/basePage';
-import { deleteView, editColumn } from '../../../pages/DvSumPages/columnDirecFolder/columnDirecPage';
+import { setUpDvSum,checkDeletedList } from '../../../pages/DvSumPages/basePageFolder/basePage';
+import { deleteView,} from '../../../pages/DvSumPages/columnDirecFolder/columnDirecPage';
 
 
 test('Delete a View in DvSum', async ({ page })=>{
     await setUpDvSum(page);
-    await deleteView(page);
+    var selectorForDeletedItem= await deleteView(page);
+    await checkDeletedList(page, selectorForDeletedItem);
   });
