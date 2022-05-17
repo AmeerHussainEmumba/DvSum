@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx playwright test editViewTest.test.ts"
+    "test_editView": "npx playwright test editViewTest.test.ts",
+    "test_favView":"npx playwright test favouriteViewTest.test.ts",
+    "test_deleteView":"npx playwright test deleteViewTest.test.ts"
   },
   "author": "",
   "license": "ISC",
